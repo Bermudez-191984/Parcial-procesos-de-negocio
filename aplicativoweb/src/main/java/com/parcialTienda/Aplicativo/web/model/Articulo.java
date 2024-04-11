@@ -1,9 +1,6 @@
 package com.parcialTienda.Aplicativo.web.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -18,4 +15,8 @@ public class Articulo {
 	private String stock;
 	private String precio;
 	private LocalDate fechaIngreso;
+
+	@ManyToOne
+	@JoinColumn(name = "articulo_id", referencedColumnName = "id")
+	private Categoria categoria;
 }

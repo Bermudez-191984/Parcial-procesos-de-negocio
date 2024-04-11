@@ -1,7 +1,9 @@
 package com.parcialTienda.Aplicativo.web.service;
 
 import com.parcialTienda.Aplicativo.web.model.Articulo;
+import com.parcialTienda.Aplicativo.web.model.Categoria;
 import com.parcialTienda.Aplicativo.web.repository.ArticuloRepository;
+import com.parcialTienda.Aplicativo.web.repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +15,13 @@ public class ArticuloService {
 	@Autowired
 	private ArticuloRepository articuloRepository;
 
+	@Autowired
+	private CategoriaService categoriaService;
+
 	/*Crear*/
-	public Articulo createArticulo(Articulo articuloReq){
+	public Articulo createArticulo(Articulo articuloReq, Long idCategoria){
+		Categoria categoria = categoriaService.getCategoriaById(idCategoria);
+		articuloReq.setCategoria(categoria);
 		return articuloRepository.save(articuloReq);
 	}
 

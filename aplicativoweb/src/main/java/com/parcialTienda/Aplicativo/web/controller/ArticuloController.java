@@ -22,9 +22,9 @@ public class ArticuloController {
 	}
 
 	/*Crear*/
-	@PostMapping("articulo")
-	public ResponseEntity<Articulo> create (@Validated @RequestBody Articulo articulo){
-		return new ResponseEntity<>(articuloService.createArticulo(articulo), HttpStatus.CREATED);
+	@PostMapping("articulo/{idCategoria}")
+	public ResponseEntity<Articulo> create (@Validated @RequestBody Articulo articulo, @PathVariable Long idCategoria){
+		return new ResponseEntity<>(articuloService.createArticulo(articulo, idCategoria), HttpStatus.CREATED);
 	}
 
 	/*Actualizar*/
