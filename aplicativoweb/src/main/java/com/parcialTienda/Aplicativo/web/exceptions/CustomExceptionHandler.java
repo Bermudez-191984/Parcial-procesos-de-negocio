@@ -80,6 +80,19 @@ public class CustomExceptionHandler {
                 HttpStatus.BAD_REQUEST
         );
     }
+    @ExceptionHandler(AuthenticationFailedException.class)
+    public ResponseEntity<Response> handleAuthenticationFailed(MethodArgumentNotValidException ex) {
+        return new ResponseEntity<>(
+                Response.builder()
+                        .responseMessage(Response.ResponseMessage.builder()
+                                .date(LocalDate.now())
+                                .message(List.of(ex.getMessage()))
+                                .statusCode(HttpStatus.FORBIDDEN.value())
+                                .build())
+                        .build(),
+                HttpStatus.FORBIDDEN
+        );
+    }
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Response> handleGenericException(Exception ex) {
         Response response = Response.builder()
@@ -92,4 +105,3 @@ public class CustomExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
-

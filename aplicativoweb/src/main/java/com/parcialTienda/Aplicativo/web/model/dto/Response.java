@@ -10,7 +10,7 @@ import java.util.List;
 @Data
 public class Response {
     private ResponseMessage responseMessage;
-
+    private Object data;
     @Data
     @Builder
     public static class ResponseMessage {
